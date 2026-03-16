@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: stockfish-18-api
+    runtime: docker
+    plan: standard
+    
+    # Build configuration
+    dockerfilePath: ./Dockerfile
+    
+    # Environment variables
+    envVars:
+      - key: STOCKFISH_PATH
+        value: /usr/games/stockfish
+      - key: STOCKFISH_THREADS
+        value: "4"
+      - key: STOCKFISH_MEMORY
+        value: "512"
+      - key: API_HOST
+        value: 0.0.0.0
+      - key: ENVIRONMENT
+        value: production
+    
+    # Health check
+    healthCheckPath: /health
+    
+    # Auto-deploy on push
+    autoDeploy: true

@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  stockfish-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stockfish-18-api
+    ports:
+      - "${API_PORT:-8000}:8000"
+    environment:
+      - STOCKFISH_PATH=/usr/games/stockfish
+      - STOCKFISH_THREADS=${STOCKFISH_THREADS:-4}
+      - STOCKFISH_MEMORY=${STOCKFISH_MEMORY:-512}
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
