@@ -276,31 +276,34 @@ ENVIRONMENT=development                      # development or production
 
 ## Deployment
 
-### Pterodactyl Panel
+### Generic Python Hosting
 
-1. **Import Egg**
-   - Download `egg.json` from this repository
-   - Go to Pterodactyl Admin Panel → Nests → Import Egg
-   - Upload `egg.json`
+For any Python hosting provider (VPS, shared hosting, cloud servers):
 
-2. **Create Server**
-   - Admin Panel → Servers → Create New
-   - Select "Stockfish 18 REST API" egg
-   - Allocate resources:
-     - Memory: 1024 MB
-     - Disk: 2048 MB
-     - CPU: 50-100%
+1. **Upload Files**
+   - Clone or upload all repository files
+   - Ensure `main.py`, `requirements.txt`, and `.env.example` are present
+
+2. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   sudo apt-get install stockfish  # For Linux
+   ```
 
 3. **Configure Environment**
-   - `STOCKFISH_THREADS`: 4 (or based on CPU)
-   - `STOCKFISH_MEMORY`: 512 (or based on RAM)
-   - `ENVIRONMENT`: production
+   ```bash
+   cp .env.example .env
+   # Edit .env with your settings
+   ```
 
-4. **Start Server**
-   - Click Start button
-   - Wait for "Uvicorn running" message
+4. **Run the API**
+   ```bash
+   python main.py
+   ```
 
-For detailed setup instructions, see [PTERODACTYL_SETUP.md](PTERODACTYL_SETUP.md)
+5. **Access the API**
+   - Swagger UI: `http://your-host:8000/docs`
+   - API: `http://your-host:8000/api/best-move`
 
 ### Railway
 
