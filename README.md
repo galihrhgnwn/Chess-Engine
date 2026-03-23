@@ -471,7 +471,7 @@ Contributions are welcome! Please:
 
 ## Support
 
-For issues, questions, or suggestions:
+For issues and questions, or suggestions:
 
 1. Check existing GitHub issues
 2. Create a new issue with detailed description
